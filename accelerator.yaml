@@ -21,7 +21,7 @@ accelerator:
       description: Git Repository URL of the application's source code
       inputType: text
       dataType: string
-      defaultValue: "https://github.com/tanzu-end-to-end/spring-sensors.git"
+      defaultValue: "https://github.com/sample-accelerators/spring-sensors.git"
 
     - name: gitBranch
       label: Git Repository Branch
@@ -31,10 +31,17 @@ accelerator:
       dataType: string
       defaultValue: "main"
 
+    - name: publisherRepository
+      inputType: text
+      label: Name of repository to use for the publisher container image
+      defaultValue: dev.local/spring-sensors-publisher
+      description: The repository name to use for the publisher image built as part of this sample in the form of registry/repository. The server/repository must match what was specified for registry.server and resgistry.repository for ootb_supply_chain_basic.
+      required: true
+
 engine:
   merge:
     - include: [ "**" ]
-      exclude: [ "tap/workload.yaml", "src/main/resources/application.yaml" ]
+      exclude: [ "tap/workload.yaml", "demo/**", "src/main/resources/application.yaml" ]
     - include: [ "tap/workload.yaml" ]
       chain:
         - type: ReplaceText
@@ -49,3 +56,9 @@ engine:
           substitutions:
              - text: Sensor Database
                with: "#title"
+    - include: [ "demo/publisher-deployment.yaml", "demo/publisher-image.yaml" ]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: dev.local/spring-sensors-publisher
+              with: "#publisherRepository"
