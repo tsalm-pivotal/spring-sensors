@@ -4,7 +4,6 @@ metadata:
   annotations:
     boot.spring.io/actuator: http://:8080/actuator
     boot.spring.io/version: 2.5.6
-    deployment.kubernetes.io/revision: "2"
   labels:
     app.kubernetes.io/component: publisher
     app.kubernetes.io/name: spring-sensors-publisher
