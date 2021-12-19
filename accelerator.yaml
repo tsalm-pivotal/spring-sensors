@@ -21,7 +21,7 @@ accelerator:
       description: Git Repository URL of the application's source code
       inputType: text
       dataType: string
-      defaultValue: "https://github.com/sample-accelerators/spring-sensors.git"
+      defaultValue: "https://github.com/sample-accelerators/spring-sensors-rabbit.git"
 
     - name: gitBranch
       label: Git Repository Branch
