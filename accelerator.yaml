@@ -35,7 +35,7 @@ accelerator:
       inputType: text
       label: Name of repository to use for the publisher container image
       defaultValue: dev.local/spring-sensors-publisher
-      description: The repository name to use for the publisher image built as part of this sample in the form of registry/repository. The server/repository must match what was specified for registry.server and resgistry.repository for ootb_supply_chain_basic.
+      description: The repository name to use for the publisher image built as part of this sample. Specify server/repository that match what was specified for registry.server and registry.repository for ootb-supply-chain-basic.
       required: true
 
 engine:
