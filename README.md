@@ -44,6 +44,12 @@ To deploy this application on VMware Tanzu Application Platform, execute the fol
 tanzu apps workload create spring-sensors -f tap/workload.yaml
 ```
 
+You can access the application's UI using the URL shown by running the following command (provided you have DNS configured for Cloud Native Runtimes):
+
+```
+tanzu app workload get spring-sensors
+```
+
 ## Deploying the publisher
 
 The sensor data is generated and sent by [this](https://github.com/tanzu-end-to-end/spring-sensors-sensor) application via asynchronous messaging.
