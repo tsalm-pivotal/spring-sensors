@@ -41,7 +41,7 @@ accelerator:
 engine:
   merge:
     - include: [ "**" ]
-      exclude: [ "tap/workload.yaml", "demo/**", "src/main/resources/application.yaml" ]
+      exclude: [ "tap/workload.yaml", "demo/**", "src/main/resources/application.yaml", "catalog/*.yaml" ]
     - include: [ "tap/workload.yaml" ]
       chain:
         - type: ReplaceText
@@ -62,3 +62,11 @@ engine:
           substitutions:
             - text: dev.local/spring-sensors-publisher
               with: "#publisherRepository"
+    - include: [ "catalog/*.yaml" ]
+      chain:
+      - type: ReplaceText
+        substitutions:
+        - text: spring-sensors
+          with: "#artifactId"
+      - type: RewritePath
+        rewriteTo: "#filename"
