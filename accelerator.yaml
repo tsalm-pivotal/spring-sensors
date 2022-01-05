@@ -51,6 +51,8 @@ engine:
               with: "#gitUrl"
             - text: main
               with: "#gitBranch"
+        - type: RewritePath
+          rewriteTo: "'config/' + #filename"
     - include: [ "src/main/resources/application.yaml" ]
       chain:
         - type: ReplaceText
@@ -69,5 +71,3 @@ engine:
         substitutions:
         - text: spring-sensors
           with: "#artifactId"
-      - type: RewritePath
-        rewriteTo: "#filename"
