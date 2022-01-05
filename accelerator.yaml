@@ -5,6 +5,7 @@ accelerator:
   tags:
     - java
     - spring
+    - tanzu
 
   options:
     - name: title
