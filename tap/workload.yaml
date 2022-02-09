@@ -3,6 +3,7 @@ kind: Workload
 metadata:
   name: spring-sensors
   labels:
+    app.kubernetes.io/part-of: spring-sensors
     apps.tanzu.vmware.com/workload-type: web
 spec:
   source:
