@@ -4,73 +4,48 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="refresh" content="5"/>
     <link href="tanzu.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <script src=https://code.jquery.com/jquery-3.3.1.min.js
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin=anonymous></script>
-
 </head>
 
 <body>
 <div class="container-fluid">
     <div class="row">
         <div class="jumbotron">
-            <h1 id="headerTitle"></h1>
+            <h1 id="headerTitle" style="color: #304250" th:text="${title}"></h1>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-4">
-                        <button type="button" id="writeButton" class="btn btn-primary">Add Sensor&nbsp;&nbsp;<i
-                                class="fa fa-toggle-up"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-sm-6">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title" th:text="${sensorDB}">Sensor DB: </h3>
+                    <h3 class="panel-title">Sensor data</h3>
                 </div>
-                <div id="mapValues" class="panel-body"></div>
+                <div id="mapValues" class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Temperature</th>
+                            <th>Pressure</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${sensors.empty}">
+                            <td colspan="2"> No Sensors Available</td>
+                        </tr>
+                        <tr th:each="sensor : ${sensors}">
+                            <td><span th:text="${sensor.id}"></span></td>
+                            <td><span th:text="${sensor.temperature}"></span></td>
+                            <td><span th:text="${sensor.pressure}"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <button type="button" id="refreshButton" class="btn btn-primary">Refresh&nbsp;&nbsp;<i
-                    class="fa fa-refresh"></i></button>
         </div>
     </div>
 </div>
 </body>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var writeUrl = [[@{/write}]];
-        $('#writeButton').click(function () {
-            $.getJSON('/write').done(refresh);
-        });
-    $('#refreshButton').click(refresh);
-
-    function refresh() {
-        $.getJSON('/refresh').done(displayData);
-    }
-
-    function displayData(data) {
-
-        console.log( 'Data=' + data );
-        $('#headerTitle').text( data.bannerText );
-        $('#headerTitle').css( 'color', data.bannerColor );
-
-        var tableHtml = '<table class="table"><thead><tr><th>ID</th><th>' + data.tempHeader + '</th><th>' + data.pressureHeader + '</th></tr></thead><tbody>';
-        for (var index in data.sensors) {
-            tableHtml += '<tr><td>' + data.sensors[index].id + '</td><td>' + data.sensors[index].temperature + '</td><td>' + data.sensors[index].pressure + '</td></tr>';
-        }
-        tableHtml += '</tbody></table>';
-        $('#mapValues').html(tableHtml);
-    }
-
-    $(document).ready(refresh);
-    /*]]>*/
-</script>
-
 </html>

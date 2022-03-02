@@ -6,7 +6,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @TestPropertySource(properties = "management.metrics.export.wavefront.enabled=false")
 @SpringBootTest
-class DemoApplicationTests {
+class SensorsApplicationTests {
 
 	@Test
 	void contextLoads() {
