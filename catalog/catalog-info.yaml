@@ -22,8 +22,6 @@ kind: API
 metadata:
   name: sensors-api
   description: API for sensor data
-  tags:
-    - Sensors
 spec:
   type: openapi
   lifecycle: experimental
