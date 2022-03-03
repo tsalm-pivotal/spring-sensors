@@ -15,6 +15,10 @@ public class SensorData {
     public SensorData() {
     }
 
+    public SensorData(double temperature, double pressure) {
+        this(UUID.randomUUID(), temperature, pressure);
+    }
+
     public SensorData(UUID id, double temperature, double pressure) {
         this.id = id;
         this.temperature = temperature;
@@ -31,5 +35,10 @@ public class SensorData {
 
     public double getPressure() {
         return pressure;
+    }
+
+    public void update(double temperature, double pressure) {
+        this.temperature = temperature;
+        this.pressure = pressure;
     }
 }
